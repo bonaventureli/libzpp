@@ -70,7 +70,7 @@
 // this structure, (which must be byte aligned!) represents the exact
 // on-disk structure of the .ZIP file's local-file-header.
 //
-struct zppLocalFileHeader {
+struct __attribute__ ((__packed__)) zppLocalFileHeader {
 	unsigned long magicNumber;	// local file header sig: 0x04034b50
     unsigned short version;	// version needed to extract
     unsigned short bitFlag;	// general purpose bit flags
@@ -93,7 +93,7 @@ struct zppLocalFileHeader {
 // was standard output or a non seekable device.
 //
 #define ZPP_DATA_DESCRIPTOR_MAGIC (0x08074B50)
-struct zppDataDescriptor {
+struct __attribute__ ((__packed__)) zppDataDescriptor {
     unsigned long magicNumber;	// data descriptor signature (0x08074b50) 
     unsigned long crc32;	// crc32 checksum
     unsigned long cmpSize;	// compressed size
@@ -105,7 +105,7 @@ struct zppDataDescriptor {
 //  Central directory structure
 //
 #define ZPP_CENTRAL_FILE_HEADER_MAGIC (0x02014b50)
-struct zppCentralDirFileHeader {
+struct __attribute__ ((__packed__)) zppCentralDirFileHeader {
     unsigned long magicNumber;	// central file header signature (0x02014b50)
     unsigned short versMadeBy;	// version made by
     unsigned short version;	// version needed to extract
@@ -129,7 +129,7 @@ struct zppCentralDirFileHeader {
 // end-of-central-directory record
 //
 #define ZPP_END_OF_CENTRAL_DIR_MAGIC (0x06054b50)
-struct zppEndOfCentralDirHeader {
+struct __attribute__ ((__packed__)) zppEndOfCentralDirHeader {
     unsigned long magicNumber;		// end of central dir signature    4 bytes  (0x06054b50)
     unsigned short diskNum;		// number of this disk             2 bytes
     unsigned short dirDiskNum;		// number of the disk with start of central dir
@@ -424,7 +424,7 @@ public:
 		// only ios::in is supported currently.
 		// if _makeGlobal == TRUE, then the ZipFile is added to the list
 		// of global zip files.
-	zppZipArchive(std::string &_fn, std::ios_base::openmode _mode = std::ios_base::in, bool _makeGlobal = true);
+	zppZipArchive(const std::string &_fn, std::ios_base::openmode _mode = std::ios_base::in, bool _makeGlobal = true);
 
 		// ctor: input is iostream
 		// (implication: can have nested .zip files if incoming stream is

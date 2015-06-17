@@ -72,13 +72,13 @@
 //
 // configuration: change these defines to compile different options.
 //
-#define ZPP_INCLUDE_OPENALL		// if defined, includes support for zppZipArchive::openAll()
+#undef ZPP_INCLUDE_OPENALL		// if defined, includes support for zppZipArchive::openAll()
 #undef ZPP_INCLUDE_CRYPT		// if defined, zip encryption support is added
 #undef ZPP_USE_STDIO                    // if defined then library itself uses C stdio for reading files
 #undef ZPP_IGNORE_DRIVE_LETTER         // remove x:/ from the start of a path
 #undef ZPP_IGNORE_PLAIN_FILE           // do not read plain files (only look at archives)
 
-#include "zpplib.h"
+#include "Zpplib.h"
 #include "zreader.h"
 #include "izstream.h"
 

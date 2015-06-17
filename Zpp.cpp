@@ -56,10 +56,12 @@
 **
 */
 
-#include "zpp.h"		// main header file, includes all "interesting" things.
+#include <stdlib.h>
+#include <string.h>
+#include <zlib.h>
 
-#include "zlib/zlib.h"
-#include "zpputil.h"
+#include "Zpp.h"		// main header file, includes all "interesting" things.
+#include "ZppUtil.h"
 
 /////////////////////////////////////////////////////////////////////////
 //
@@ -659,7 +661,7 @@ void zppZipArchive::parseZipDirectory()
 // only std::ios::in is supported currently.
 // if _makeGlobal == TRUE, then the ZipFile is added to the list
 // of global zip files.
-zppZipArchive::zppZipArchive(std::string &_fn, std::ios::openmode _mode, bool _makeGlobal)
+zppZipArchive::zppZipArchive(const std::string &_fn, std::ios::openmode _mode, bool _makeGlobal)
 {
 	ourFile = false;
 	zipName = _fn;

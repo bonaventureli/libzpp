@@ -19,7 +19,7 @@ int main(int argc, char** argv)
     try
     {
 #ifndef ZPP_INCLUDE_OPENALL
-        zppZipArchive zf1(string("zpp.zip"));
+        zppZipArchive zf1(std::string("zpp.zip"));
 #endif /* ZPP_INCLUDE_OPENALL */
 
         izppstream fp;
