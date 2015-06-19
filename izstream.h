@@ -174,11 +174,19 @@ public:
 		{if (_Sb.open(_S, _seekable) == false)
 		 	setstate(failbit); }
 
+	void open(std::string _S, zppZipArchive *_zip, std::ios_base::openmode _M = in, bool _seekable = false)
+		{if (_Sb.open(_S, _zip, _seekable) == false)
+		 	setstate(failbit); }
+
 	void open(std::string _S, std::ios_base::open_mode _M, bool _seekable = false)
 		{open(_S, _M, _seekable); }
 
 	void open(const char *_S, std::ios_base::openmode _M = in, bool _seekable = false)
 		{if (_Sb.open(std::string(_S), _seekable) == false)
+		 	setstate(failbit); (void)_M;}
+
+	void open(const char *_S, zppZipArchive *_zip, std::ios_base::openmode _M = in, bool _seekable = false)
+		{if (_Sb.open(std::string(_S), _zip, _seekable) == false)
 		 	setstate(failbit); (void)_M;}
 
 	void open(const char *_S, std::ios_base::open_mode _M, bool _seekable = false)
