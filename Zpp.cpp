@@ -212,6 +212,23 @@ zppZipFileInfo::zppZipFileInfo(long cdoff, zppZipArchive *parent) :
 		lclHeader.fnLength + lclHeader.extraLength;
 
 	// verify that the local header matches the cd header.
+
+        // from zip file specification:
+        // If the bit at offset 3 (0x06) of the general-purpose flags field is
+        // set, then the CRC-32 and file sizes are not known when the header is
+        // written. The fields in the local header are filled with zero, and the
+        // CRC-32 and size are appended in a 12-byte structure (optionally
+        // preceded by a 4-byte signature) immediately after the compressed data:
+        //   Offset 	Bytes 	Description
+        //   0          0/4     Optional data descriptor signature = 0x08074b50
+        //   0/4        4       CRC-32
+        //   4/8        4       Compressed size
+        //   8/12       4       Uncompressed size
+
+        // therefore, skip consistency check for crc32, compressed size, and
+        // uncompressed size if bit at offset 3 of flags field is set
+
+        bool dataInExtraField = lclHeader.bitFlag & (1<<3);
 	
     if (lclHeader.version != cdHeader.version)
 		throw zppError("local/central header mismatch: version");
@@ -223,16 +240,16 @@ zppZipFileInfo::zppZipFileInfo(long cdoff, zppZipArchive *parent) :
 		throw zppError("local/central header mismatch: modTime");
     if (lclHeader.modDate != cdHeader.modDate)
 		throw zppError("local/central header mismatch: modDate");
-    if (lclHeader.crc32 != cdHeader.crc32)
+    if (!dataInExtraField && lclHeader.crc32 != cdHeader.crc32)
 		throw zppError("local/central header mismatch: crc32");
-    if (lclHeader.cmpSize != cdHeader.cmpSize)
+    if (!dataInExtraField && lclHeader.cmpSize != cdHeader.cmpSize)
 		throw zppError("local/central header mismatch: cmpSize");
-    if (lclHeader.realSize != cdHeader.realSize)
+    if (!dataInExtraField && lclHeader.realSize != cdHeader.realSize)
 		throw zppError("local/central header mismatch: realSize");
     if (lclHeader.fnLength != cdHeader.fnLength)
 		throw zppError("local/central header mismatch: fnLength");
-    if (lclHeader.extraLength != cdHeader.extraLength)
-		throw zppError("local/central header mismatch: extraLength");
+    // don't expect extra field length in local file header to necessarily match
+    // extra field length in central directory header
 
 	//
 	// printf("'%s', magic = %x, vers = %x, extVer = %x, bitFlag = %x, method=%d\n"
