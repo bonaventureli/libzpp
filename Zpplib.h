@@ -585,6 +585,9 @@ public:
 		// throw a zppError on failure.
 	void getCentralHeader(long offset, zppCentralDirFileHeader *hdr);
 
+		// return read only reference to file map
+	const zppFileMap& getFileMap() const { return fileMap; }
+
 		// if this function is called, we are given ownership to delete
 		// the stream we were passed in the constructor when we are deleted.
 		// otherwise, we will not delete it.
