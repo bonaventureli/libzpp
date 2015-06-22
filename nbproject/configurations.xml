@@ -17,7 +17,6 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>Util.cpp</itemPath>
       <itemPath>Zpp.cpp</itemPath>
       <itemPath>izstream.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
@@ -47,8 +46,6 @@
           <commandLine>-lz</commandLine>
         </linkerTool>
       </compileType>
-      <item path="Util.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="Zpp.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Zpp.h" ex="false" tool="3" flavor2="0">
@@ -89,8 +86,6 @@
           <commandLine>-lz</commandLine>
         </linkerTool>
       </compileType>
-      <item path="Util.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="Zpp.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Zpp.h" ex="false" tool="3" flavor2="0">
