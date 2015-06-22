@@ -28,11 +28,11 @@ $(TARGET).so: $(OBJECTS)
 	@echo " Building file: $<"
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ -c $<
 
-install:
+install: $(TARGET).so
 	install -m 0644 $(INSTALL_HEADERS) $(PREFIX)/include
 	install $(TARGET).so $(PREFIX)/lib
 
-uninstall: zpp.h
+uninstall:
 	rm -rf $(addprefix $(PREFIX)/include/, $(INSTALL_HEADERS))
 	rm -rf $(PREFIX)/lib/$(TARGET).so
 
