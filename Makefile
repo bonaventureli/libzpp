@@ -25,7 +25,6 @@ $(TARGET).so: $(OBJECTS)
 	$(CXX) -shared -Wl,--no-undefined $(CXXFLAGS) -o $@ $^ $(LIBS)
 
 %.o: %.cpp
-	@echo " Building file: $<"
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ -c $<
 
 install: $(TARGET).so
