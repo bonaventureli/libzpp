@@ -60,8 +60,8 @@
 #include <string.h>
 #include <zlib.h>
 
-#include "Zpp.h"		// main header file, includes all "interesting" things.
-#include "ZppUtil.h"
+#include "zpp.h"		// main header file, includes all "interesting" things.
+#include "zpputil.h"
 
 /////////////////////////////////////////////////////////////////////////
 //

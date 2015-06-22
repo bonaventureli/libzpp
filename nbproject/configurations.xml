@@ -4,10 +4,10 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>Zpp.h</itemPath>
-      <itemPath>ZppUtil.h</itemPath>
-      <itemPath>Zpplib.h</itemPath>
       <itemPath>izstream.h</itemPath>
+      <itemPath>zpp.h</itemPath>
+      <itemPath>zpplib.h</itemPath>
+      <itemPath>zpputil.h</itemPath>
       <itemPath>zreader.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -17,9 +17,9 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>Zpp.cpp</itemPath>
       <itemPath>izstream.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
+      <itemPath>zpp.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -46,19 +46,19 @@
           <commandLine>-lz</commandLine>
         </linkerTool>
       </compileType>
-      <item path="Zpp.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Zpp.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ZppUtil.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Zpplib.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="izstream.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="izstream.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="zpp.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="zpp.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="zpplib.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="zpputil.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="zreader.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -86,19 +86,19 @@
           <commandLine>-lz</commandLine>
         </linkerTool>
       </compileType>
-      <item path="Zpp.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Zpp.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ZppUtil.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Zpplib.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="izstream.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="izstream.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="zpp.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="zpp.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="zpplib.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="zpputil.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="zreader.h" ex="false" tool="3" flavor2="0">
       </item>

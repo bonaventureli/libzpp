@@ -50,7 +50,7 @@
 ** Initial revision
 **
 */
-#include "Zpp.h"
+#include "zpp.h"
 
 
 #if _MSC_VER <= 1200

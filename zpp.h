@@ -78,7 +78,7 @@
 #undef ZPP_IGNORE_DRIVE_LETTER         // remove x:/ from the start of a path
 #undef ZPP_IGNORE_PLAIN_FILE           // do not read plain files (only look at archives)
 
-#include "Zpplib.h"
+#include "zpplib.h"
 #include "zreader.h"
 #include "izstream.h"
 
