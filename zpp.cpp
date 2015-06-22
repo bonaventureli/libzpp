@@ -414,9 +414,9 @@ void zppZipArchive::dumpGlobalMap()
 	for ( i = globalMap.begin(); i != globalMap.end(); i++ ) {
 		fprintf(stderr,"  %s (%s prio %d from %s)\n",
 			(*i).first.c_str(),
-			(*i).second->getName().c_str(),
-			(*i).second->getPriority(),
-			(*i).second->getParentZip()->getName().c_str());
+			(*i).second.getName().c_str(),
+			(*i).second.getPriority(),
+			(*i).second.getParentZip()->getName().c_str());
 	}
 	fprintf(stderr,"--- end of global map ---\n");
 }
@@ -549,8 +549,6 @@ void zppZipArchive::parseZipDirectory()
     long eofOffset;
 	std::string dirPrefix;
 
-	// make sure that vector of files is empty
-	files.clear();
 	fileMap.clear();
 
 	if (!rawSeek(0,std::ios_base::end))
@@ -620,56 +618,33 @@ void zppZipArchive::parseZipDirectory()
 	int pos = ecdHeader.dirOffset;
 	int i;
 	
-	files.reserve(ecdHeader.entryCntTotal);
-	
-	for ( i = 0 ; i < ecdHeader.entryCntTotal; i++ ) {
-		// printf("file #%d: pos = %d\n",i, pos);
-
-		zppZipFileInfo file(pos,this);
-
-		files.push_back(file);
-
-		// advance position in directory by size of this object.
-		pos += file.cdSize(); 
-	}
-
-	//
 	// here we make a canonical filename -> file reference map.
-	// XXX -- think about whether we need this map AND the vector
-	// above; might be easier to just have the map.
-	//
-	zppZipDirectory::iterator iter;
 
-	for (iter = files.begin(); iter != files.end(); iter++) {
-		std::string tmp = (*iter).getName();
-		canonizePath(tmp);
+	for (i = 0 ; i < ecdHeader.entryCntTotal; i++) {
+		zppZipFileInfo file(pos,this);
+		std::string name = file.getName();
+		canonizePath(name);
 		// printf("org name = '%s', canonical name = '%s'\n", (*iter).getName().c_str(), tmp.c_str());
-		fileMap[tmp] = iter;
+		fileMap[name] = file;
+
 		if (isGlobal) {
 			//
 			// search global directory for this (canonical) file name
 			//
-			zppFileMap::iterator i2 = globalMap.find(tmp);
+			zppFileMap::iterator i2 = globalMap.find(name);
 			//
-			// if we find one, and the priority
-			// is less than the current file, replace
-			// the existing key with the current file.
+			// update the map entry for the file with name if the global map does
+			// not yet contain an entry for file with name or the priority of
+			// this archive is higher than the priority of the file currently in the map
 			//
-			if ( i2 == globalMap.end()) {
+			if (i2 == globalMap.end() || i2->second.getPriority() < priority) {
 				// printf("XXX -- Adding %s prio %d from %s\n", tmp.c_str(), (*iter).getPriority(), (*iter).getParentZip()->getName().c_str());
-				globalMap[tmp] = iter;
-			} else if ((*i2).second->getPriority() < priority) {
-
-				// printf("XXX -- replaced %s prio %d from %s with prio %d from %s\n",
-				//	((*i2).second)->getName().c_str(),
-				//	(*i2).second->getPriority(),
-				//	(*i2).second->getParentZip()->getName().c_str(),
-				//	(*iter).getPriority(),
-				//	(*iter).getParentZip()->getName().c_str());
-
-				(*i2).second = iter;
+				globalMap[name] = file;
 			}
 		}
+
+		// advance position in directory by size of this object.
+		pos += file.cdSize(); 
 	}
 }
 
@@ -877,11 +852,7 @@ zppZipFileInfo *zppZipArchive::findInArchive(const std::string filename)
 		return NULL;
 	}
 
-	// oy, this is ugly -- here's the scoop:
-	// (*i2).second is a zppZipDirectory::iterator,
-	// dereferencing that gives us a zppZipFileInfo object
-	// and we want to return the address of that.
-	return (&(*((*i2).second)));
+	return &i2->second;
 }
 
 
@@ -895,12 +866,7 @@ zppZipFileInfo *zppZipArchive::find(const std::string &filename)
 
 	if (i2 == globalMap.end()) return NULL;
 
-	// oy, this is ugly -- here's the scoop:
-	// (*i2).second is a zppZipDirectory::iterator,
-	// dereferencing that gives us a zppZipFileInfo object
-	// and we want to return the address of that.
-	zppZipFileInfo &info=*(i2->second);
-	return &info;
+	return &i2->second;
 }
 
 /////////////////////////////////////////////////////////////////////////

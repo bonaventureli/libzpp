@@ -387,9 +387,7 @@ protected:
 
 };
 
-typedef std::vector<zppZipFileInfo> zppZipDirectory;
-
-typedef std::map<std::string,zppZipDirectory::iterator> zppFileMap;
+typedef std::map<std::string,zppZipFileInfo> zppFileMap;
 
 typedef std::map<std::string,std::string> zppStrStrMap;
 
@@ -449,7 +447,6 @@ public:
 
 
 private:
-	zppZipDirectory files;		// vector files contained in the .zip file
 	zppFileMap fileMap;			// filename map
 	int priority;				// priority read from zip info
 	bool isGlobal;				// true if this .ZIP has been added to global list.
