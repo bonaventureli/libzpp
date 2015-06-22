@@ -58,10 +58,6 @@
 #error this is a C++ header file.
 #endif /* __cplusplus */
 
-#if _MSC_VER <= 1200
-#pragma warning ( disable : 4786 )
-#endif /* _MSC_VER */
-
 #include <iostream>
 #include <map>
 #include <string>

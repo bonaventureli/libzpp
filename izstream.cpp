@@ -52,11 +52,6 @@
 */
 #include "zpp.h"
 
-
-#if _MSC_VER <= 1200
-#pragma warning ( disable : 4786 )
-#endif /* _MSC_VER */
-
 /////////////////////////////////////////////////////////////////////////
 //
 // zppstreambuf implementation

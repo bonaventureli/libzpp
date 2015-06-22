@@ -1091,13 +1091,13 @@ long zppZipReader::read(char *buf, long len)
 			case ZPP_DEFLATED:
 				{
 					uLong uTotalOutBefore,uTotalOutAfter;
-					const Bytef *bufBefore;
+					//const Bytef *bufBefore;
 					uLong uOutThis;
 					int flush=Z_SYNC_FLUSH;
 					int err;
 
 					uTotalOutBefore = stream->total_out;
-					bufBefore = stream->next_out;
+					//bufBefore = stream->next_out;
 
 					err=inflate(stream,flush);
 

@@ -278,6 +278,11 @@ public:
 //
 class zppZipFileInfo {
 protected:
+	long centralDirOff;		// off of this file's central dir entry
+	long centralDirSize;	// size of this file's central dir entry.
+	long lclHdrOff;			// offset to local file header
+	long dataOffset;		// offset of this file's data stream
+	long realSize, cmpSize;	// real and compressed data sizes
 #ifdef ZPP_USE_STDIO
         FILE *fp;				// if opened as a file, underlying file stream
 #else
@@ -286,11 +291,6 @@ protected:
 	zppZipArchive *parentZip;	// zip containing this file.
     std::string fileName;			// filename read from file
 
-	long realSize, cmpSize;	// real and compressed data sizes
-	long centralDirOff;		// off of this file's central dir entry
-	long centralDirSize;	// size of this file's central dir entry.
-	long lclHdrOff;			// offset to local file header
-	long dataOffset;		// offset of this file's data stream
 #ifdef ZPP_INCLUDE_CRYPT
 	bool isEncrypted;		// TRUE == file is encrypted
 #endif /* ZPP_INCLUDE_CRYPT */
