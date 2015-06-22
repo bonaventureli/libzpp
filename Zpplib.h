@@ -193,7 +193,7 @@ enum zppComprMethod {
 class zppError {
 public:
 	std::string str;
-	zppError(char *s) : str(s) { };
+	zppError(const char *s) : str(s) { };
 	zppError(std::string &s) : str(s) { };
 };
 
