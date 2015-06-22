@@ -814,7 +814,7 @@ zppZipArchive *zppZipArchive::findArchive(const std::string &name)
 
 int zppZipArchive::getComment(char *pComment, int offset, int size)
 {
-	int toRead;
+	int toRead = 0;
 	// no comment, no work to do.
 	if (ecdHeader.commentLength == 0) return 0;
 
