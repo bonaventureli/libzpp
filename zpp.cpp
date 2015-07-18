@@ -301,10 +301,12 @@ void zppZipArchive::canonizePath(std::string &str)
 	  str.erase(str.begin());
 	}
 #endif
+#if 0 // No need to downcase under Linux
 	for ( i = str.begin(); i != str.end(); i++ ) {
 		if ( (*i) == '\\' ) (*i) = '/';
 		else (*i) = tolower(*i);
 	}
+#endif
 }
 
 
